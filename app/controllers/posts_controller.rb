@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!, except: %i[ index show]
-  before_action :authorize_user, only: %i[ edit update destroy]
+
   # GET /posts or /posts.json
   def index
     @pagy, @posts = pagy(Post.all) 
+    authorize @posts
   end
 
   # GET /posts/1 or /posts/1.json
@@ -14,6 +14,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    authorize @post
   end
 
   # GET /posts/1/edit
@@ -23,7 +24,7 @@ class PostsController < ApplicationController
   # POST /posts or /posts.json
   def create
     @post = current_user.posts.new(post_params)
-
+    authorize @post
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: "Post was successfully created." }
@@ -61,10 +62,7 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
-    end
-
-    def authorize_user
-      redirect_to posts_path, alert: 'You have no right to do this action' unless current_user.id == @post.user_id
+      authorize @post
     end
 
     # Only allow a list of trusted parameters through.
