@@ -2,6 +2,9 @@
 
 [https://simple-ana-blog.herokuapp.com/](https://simple-ana-blog.herokuapp.com/)
 
+admin: admin@example.com 
+password: 123456
+
 ## Install
 
 ### Clone the repository
