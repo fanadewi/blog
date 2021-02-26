@@ -75,7 +75,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   config.action_mailer.default_url_options = { host: ENV['HOST'], port: ENV['PORT'] }
   config.action_mailer.delivery_method = :smtp
-  host = 'localhost:3000'
 
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
