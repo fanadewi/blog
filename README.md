@@ -35,9 +35,11 @@ bundle && yarn
 
 ### Set environment variables
 
-Using [dotenv](https://github.com/bkeepers/dotenv):
-
-See [.env_template](https://github.com/fanadewi/blog/blob/master/.env_template)
+Using [dotenv](https://github.com/bkeepers/dotenv)
+```shell
+gem install dotenv
+```
+create .env file. See [.env_template](https://github.com/fanadewi/blog/blob/master/.env_template)
 
 ### Initialize the database
 
@@ -47,7 +49,8 @@ rails db:create db:migrate db:seed
 
 ## Serve
 
+Using [overmind](https://github.com/DarthSim/overmind)
 
 ```shell
-rails s
+overmind s
 ```
