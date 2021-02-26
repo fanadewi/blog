@@ -24,7 +24,7 @@ class PostPolicy  < ApplicationPolicy
   end
 
   def destroy?
-    user.present? && user == post.user
+    user.present? && (user == post.user || user.is_admin?)
   end
 
   private
