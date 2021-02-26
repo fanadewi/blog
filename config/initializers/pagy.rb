@@ -2,4 +2,4 @@
 
 require 'pagy/extras/array'
 
-Pagy::VARS[:items] = 3
+Pagy::VARS[:items] = ENV['ITEM_PER_PAGE'] || 3
