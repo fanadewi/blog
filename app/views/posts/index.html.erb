@@ -1,29 +1,17 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Posts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<% if @posts.empty? %>
+  There is no Post yet
+<% else %>
+  <% @posts.each do |post| %>
+    <h2><%= post.title %></h2>
+    <p><%= post.content %></p>
+    <br/>
+    <%= link_to 'Show', post %>
+    <%= link_to 'Edit', edit_post_path(post) %>
+    <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <br/>
+  <% end %>
+<% end %>
+<br/>
+<%= render 'layouts/shared/pagination', pagy: @pagy %>
+<br/>
 <%= link_to 'New Post', new_post_path %>
