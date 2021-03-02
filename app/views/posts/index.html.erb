@@ -1,41 +1,30 @@
-<!-- Main Content -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-      <% if @posts.empty? %>
-        <p>There is no Post yet </p>
-      <% else %>
-        <% @posts.each do |post| %>
-          <div class="post-preview">
-            <%= link_to post_path(post) do %>
-              <h2 class="post-title">
-                <%= post.title %>
-              </h2>
-              <h3 class="post-subtitle">
-                <%= post.content[...30] %>
-              </h3>
-            <% end %>
-            <p class="post-meta">Posted by
-              <%= post.author_email %>
-              on <%= post.created_at %></p>
-          </div>
-          <% if is_owner?(post) %>
-            <%= link_to 'Edit', edit_post_path(post) %>
-            <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
-          <hr>
-        <% end %>
+<% if @posts.empty? %>
+  <p>There is no Post yet </p>
+<% else %>
+  <% @posts.each do |post| %>
+    <div class="post-preview">
+      <%= link_to post_path(post) do %>
+        <h2 class="post-title">
+          <%= post.title %>
+        </h2>
+        <h3 class="post-subtitle">
+          <%= post.content[...30] %>
+        </h3>
       <% end %>
-      <!-- Pager -->
-      <div class="clearfix">
-        <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-      </div>
+      <p class="post-meta">Posted by
+        <%= post.author_email %>
+        on <%= post.created_at %></p>
     </div>
-  </div>
+    <% if is_owner?(post) %>
+      <%= link_to 'Edit', edit_post_path(post) %>
+      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <hr>
+  <% end %>
+<% end %>
+<!-- Pager -->
+<div class="clearfix d-flex justify-content-center">
+  <%= render 'layouts/shared/pagination', pagy: @pagy %>
 </div>
 
 <hr>
-<%= render 'layouts/shared/pagination', pagy: @pagy %>
-<% if user_signed_in? %>
-  <%= link_to 'New Post', new_post_path %>
-<% end %>
