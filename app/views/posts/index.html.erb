@@ -1,22 +1,30 @@
 <% if @posts.empty? %>
-  There is no Post yet
+  <p>There is no Post yet </p>
 <% else %>
   <% @posts.each do |post| %>
-    <h2><%= post.title %></h2>
-    <p><%= post.content %></p>
-    <span><%= post.author_email %></span>
-    <br/>
-    <%= link_to 'Show', post %>
+    <div class="post-preview">
+      <%= link_to post_path(post) do %>
+        <h2 class="post-title">
+          <%= post.title %>
+        </h2>
+        <h3 class="post-subtitle">
+          <%= post.content[...30] %>
+        </h3>
+      <% end %>
+      <p class="post-meta">Posted by
+        <%= post.author_email %>
+        on <%= post.created_at %></p>
+    </div>
     <% if is_owner?(post) %>
       <%= link_to 'Edit', edit_post_path(post) %>
       <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
-    <br/>
+    <hr>
   <% end %>
 <% end %>
-<br/>
-<%= render 'layouts/shared/pagination', pagy: @pagy %>
-<br/>
-<% if user_signed_in? %>
-  <%= link_to 'New Post', new_post_path %>
-<% end %>
+<!-- Pager -->
+<div class="clearfix d-flex justify-content-center">
+  <%= render 'layouts/shared/pagination', pagy: @pagy %>
+</div>
+
+<hr>

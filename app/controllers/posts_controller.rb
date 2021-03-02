@@ -3,12 +3,15 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @pagy, @posts = pagy(Post.all) 
+    @pagy, @posts = pagy(Post.all.with_rich_text_content) 
     authorize @posts
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    # get first image from blog post
+    image = @post.content.embeds.find{|embeds| embeds.image?}
+    @image = image.blob.url unless image.nil?
   end
 
   # GET /posts/new

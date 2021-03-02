@@ -18,6 +18,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
+    has_rich_text :content
     belongs_to :user
     delegate :email, to: :user, prefix: :author
 end
