@@ -9,7 +9,9 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    @image = 'https://pbs.twimg.com/media/EvZepmnVEAAlGRe?format=jpg&name=orig'
+    # get first image from blog post
+    image = @post.content.embeds.find{|embeds| embeds.image?}
+    @image = image.blob.url unless image.nil?
   end
 
   # GET /posts/new
