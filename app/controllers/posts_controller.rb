@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @pagy, @posts = pagy(Post.all) 
+    @pagy, @posts = pagy(Post.all.with_rich_text_content) 
     authorize @posts
   end
 
