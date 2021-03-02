@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    @image = 'https://pbs.twimg.com/media/EvZepmnVEAAlGRe?format=jpg&name=orig'
   end
 
   # GET /posts/new
